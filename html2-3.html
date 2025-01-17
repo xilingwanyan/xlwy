@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简洁网页</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-y: auto; /* 允许垂直滚动 */
+        }
+        body {
+            background-image: url('file:///storage/emulated/0/Android/data/mark.via/cache/content/htmlpng1.png'); /* 本地背景图片 */
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh; /* 容器高度为视口高度 */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .text-box {
+            width: 90%; /* 增加宽度 */
+            max-width: 1200px; /* 设置最大宽度 */
+            margin: 0.5cm 0; /* 上下间距0.5cm */
+            position: relative;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.3); /* 半透明背景 */
+            border-radius: 10px; /* 四角圆润 */
+            backdrop-filter: blur(5px); /* 背景高斯模糊 */
+            transform: translateX(-25%); /* 初始位置在左侧25% */
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+            will-change: transform, opacity; /* 优化动画性能 */
+            pointer-events: none; /* 初始时不响应点击 */
+            display: flex;
+            flex-direction: column;
+        }
+        .text-box.visible {
+            transform: translateX(0); /* 可见时的位置 */
+            opacity: 1;
+            pointer-events: auto; /* 可见时响应点击 */
+        }
+        .title-bar {
+            background-color: rgba(255, 255, 255, 0.4); /* 标题栏不透明度设为0.4 */
+            padding: 10px;
+            border-radius: 10px 10px 0 0; /* 标题栏四角圆润 */
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 5px; /* 减少标题栏与文本内容的间距 */
+        }
+        .text-content {
+            padding: 10px;
+            flex: 1; /* 使文本内容区域自适应高度 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-box" id="textBox1">
+            <div class="title-bar">标题1</div>
+            <div class="text-content">
+                <p>这是第一个长方形文本框的内容。你可以在这里输入任意文本。</p>
+            </div>
+        </div>
+        <div class="text-box" id="textBox2">
+            <div class="title-bar">标题2</div>
+            <div class="text-content">
+                <p>这是第二个长方形文本框的内容。你可以在这里输入任意文本。</p>
+            </div>
+        </div>
+        <!-- 继续添加其他文本框 -->
+        <div class="text-box" id="textBox3">
+            <div class="title-bar">标题3</div>
+            <div class="text-content">
+                <p>这是第三个长方形文本框的内容。你可以在这里输入任意文本。</p>
+            </div>
+        </div>
+        <div class="text-box" id="textBox4">
+            <div class="title-bar">标题4</div>
+            <div class="text-content">
+                <p>这是第四个长方形文本框的内容。你可以在这里输入任意文本。</p>
+            </div>
+        </div>
+        <div class="text-box" id="textBox5">
+            <div class="title-bar">标题5</div>
+            <div class="text-content">
+                <p>这是第五个长方形文本框的内容。你可以在这里输入任意文本。</p>
+            </div>
+        </div>
+        <div class="text-box" id="textBox6">
+            <div class="title-bar">标题6</div>
+            <div class="text-content">
+                <p>这是第六个长方形文本框的内容。你可以在这里输入任意文本。</p>
+            </div>
+        </div>
+        <div class="text-box" id="textBox7">
+            <div class="title-bar">标题7</div>
+            <div class="text-content">
+                <p>这是第七个长方形文本框的内容。你可以在这里输入任意文本。</p>
+            </div>
+        </div>
+        <div class="text-box" id="textBox8">
+            <div class="title-bar">标题8</div>
+            <div class="text-content">
+                <p>这是第八个长方形文本框的内容。你可以在这里输入任意文本。</p>
+            </div>
+        </div>
+        <div class="text-box" id="textBox9">
+            <div class="title-bar">标题9</div>
+            <div class="text-content">
+                <p>这是第九个长方形文本框的内容。你可以在这里输入任意文本。</p>
+            </div>
+        </div>
+        <div class="text-box" id="textBox10">
+            <div class="title-bar">标题10</div>
+            <div class="text-content">
+                <p>这是第十个长方形文本框的内容。你可以在这里输入任意文本。</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let textBoxes = document.querySelectorAll('.text-box');
+            let observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, {
+                threshold: [0, 1.0] // 调整为0和1.0，确保文本框完全离开视口时才触发
+            });
+
+            textBoxes.forEach(textBox => {
+                observer.observe(textBox);
+            });
+        });
+    </script>
+</body>
+</html>
